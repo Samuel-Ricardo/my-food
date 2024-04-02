@@ -12,6 +12,8 @@ data class RestaurantOrderLineItem(val quantity: Int, val menuItemId: String, va
 
 data class RestaurantItem(val orderLineItems: MutableList<RestaurantOrderLineItem>, val orderVersion: String);
 
+data class RestaurantOrderDetails(val lineItems: List<RestaurantOrderLineItem>)
+
 enum class RestaurantOrderState {
     CREATED, PREPARED, CANCELLED
 }
