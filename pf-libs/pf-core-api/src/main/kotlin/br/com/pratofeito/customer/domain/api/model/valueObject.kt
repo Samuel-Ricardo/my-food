@@ -9,7 +9,7 @@ enum class CustomerOrderState {
     CANCELED
 }
 
-data class CustomerId(val identifier:String): Serializable {
+data class CustomerId(val identifier:String) {
     constructor(): this(UUID.randomUUID().toString());
 
     override fun toString(): String = identifier;

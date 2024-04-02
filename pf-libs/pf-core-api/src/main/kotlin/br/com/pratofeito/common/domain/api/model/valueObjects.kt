@@ -9,6 +9,8 @@ data class PersonName(val firstName: String, val lastName: String)
 
 data class Money(val amount: BigDecimal) {
 
+    constructor(): this(BigDecimal.ZERO);
+
     fun add(delta: Money): Money {
         return Money(amount.add(delta.amount));
     }
