@@ -40,7 +40,7 @@ data class CreateCourierOrderCommand(
     override val auditEntry: AuditEntry
 ) : CourierOrderCommand(targetAggregateIdentifier, auditEntry) {
 
-    constructor( auditEntry: AuditEntry ): this(CourierOrderId(), auditEntry)
+    constructor( auditEntry: AuditEntry ):  this(CourierOrderId(), auditEntry)
 }
 
 data class AssignCourierOrderCommand(
@@ -49,6 +49,14 @@ data class AssignCourierOrderCommand(
     val courierId: CourierId,
     override val auditEntry: AuditEntry
 ): CourierOrderCommand(targetAggregateIdentifier, auditEntry)
+
+data class AssignCourierOrderToCourierCommand(
+    @TargetAggregateIdentifier
+    override val targetAggregateIdentifier: CourierOrderId,
+    val courierId: CourierId,
+    override val auditEntry: AuditEntry
+) : CourierOrderCommand(targetAggregateIdentifier, auditEntry)
+
 
 data class MarkCourierOrderAsDeliveredCommand(
     @TargetAggregateIdentifier

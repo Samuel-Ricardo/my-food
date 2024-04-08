@@ -4,7 +4,7 @@ import java.util.UUID
 
 
 enum class CourierOrderState {
-    CREATED, ASSIGN_PENDIGN, ASSIGNED, DELIVERED, CANCEL_PENDING, CANCELED
+    CREATED, ASSIGN_PENDING, ASSIGNED, DELIVERED, CANCEL_PENDING, CANCELED
 }
 
 data class CourierId(val identifier: String) {
