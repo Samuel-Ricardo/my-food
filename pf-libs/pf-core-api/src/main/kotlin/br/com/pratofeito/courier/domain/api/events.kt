@@ -19,7 +19,7 @@ abstract class CourierOrderEvent(
 
 data class CourierCreatedEvent(
     val name: PersonName,
-    val maxNumberOfActiveOrder: Int,
+    val maxNumberOfActiveOrders: Int,
     override val aggregateIdentifier: CourierId,
     override val auditEntry: AuditEntry,
 ): CourierEvent(aggregateIdentifier, auditEntry)
