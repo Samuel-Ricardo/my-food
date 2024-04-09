@@ -36,12 +36,12 @@ data class CreateCustomerCommand(
 data class CreateCustomerOrderCommand(
     @TargetAggregateIdentifier
     override val targetAggregateIdentifier: CustomerId,
-    override val auditEntry: AuditEntry,
     val customerOrderId: CustomerOrderId,
     @field:Valid val orderTotal: Money,
+    override val auditEntry: AuditEntry,
 ): CustomerCommand(targetAggregateIdentifier, auditEntry) {
     constructor(targetAggregateIdentifier: CustomerId, orderTotal: Money, auditEntry: AuditEntry) :
-        this(targetAggregateIdentifier, auditEntry, CustomerOrderId(), orderTotal);
+        this(targetAggregateIdentifier, CustomerOrderId(), orderTotal, auditEntry);
 
 }
 
