@@ -28,9 +28,9 @@ data class RestaurantId(val identifier: String):Serializable {
     override fun toString() = identifier;
 }
 
-data class RestaurantOrderId(val name: String):Serializable {
+data class RestaurantOrderId(val identifier: String):Serializable {
 
     constructor(): this(UUID.randomUUID().toString())
 
-    override fun toString() = name
+    override fun toString() = identifier
 }
