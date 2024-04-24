@@ -1,31 +1,28 @@
 <!DOCTYPE html>
-
 <html>
-
-    <head>
-        <title>Criar Cliente</title>
-    </head>
-
-    <body onload="disconnect()">
-    <noscript>
-        <h2 style="color: #ff0000">
-            Seems your browser doesn't support Javascript! Websocket relies on Javascript being enabled. Please enable  Javascript and reload this page!
-        </h2>
-    </noscript>
+<head>
+    <title>Criar Cliente</title>
+</head>
+<body onload="disconnect()">
+<noscript><h2 style="color: #ff0000">JS não suportado!</h2></noscript>
+<div>
     <div>
-        <div>
-            <button id="connect" onclick="connect();">Conectar</button>
-            <button id="disconnect" disabled="disabled" onclick="disconnect();">Desconectar</button>
-        </div>
-        <div id="conversationDiv">
-            <label>What is your first name?</label><input type="text" id="firstName"/>
-            <label>What is your last name?</label><input type="text" id="lastName"/>
-            <label>Order limit</label><input type="text" id="orderLimit"/>
-            <button id="sendCommand" onclick="sendCommand();">Send</button>
-            <p id="response"></p>
-        </div>
+        <button id="connect" onclick="connect();">Conectar</button>
+        <button id="disconnect" disabled="disabled" onclick="disconnect();">Desconectar</button>
     </div>
-    <script src="stomp.js"></script>
-    <script src="app.js"></script>
-    </body>
+    <br />
+    <br />
+    <div id="conversationDiv">
+        <label>Qual o seu primeiro nome?</label><input type="text" id="firstName"/> <br /><br />
+        <label>Qual o seu último nome?</label><input type="text" id="lastName"/> <br /><br />
+        <label>Limite de compras</label><input type="text" id="orderLimit"/> <br /><br />
+        <button id="sendCommand" onclick="sendCommand();">Send</button>
+        <p id="response"></p>
+        <button id="createRestaurantCommand" onclick="createRestaurantCommand();">Create Restaurant</button>
+    </div>
+</div>
+<script src="stomp.js"></script>
+<script src="app.js"></script>
+</body>
 </html>
+

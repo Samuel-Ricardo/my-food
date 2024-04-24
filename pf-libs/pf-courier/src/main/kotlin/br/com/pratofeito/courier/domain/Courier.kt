@@ -8,19 +8,24 @@ import br.com.pratofeito.courier.domain.api.model.CourierId
 import br.com.pratofeito.courier.domain.api.model.CourierOrderId
 import br.com.pratofeito.courier.domain.model.CourierValidateOrderWithErrorInternalEvent
 import br.com.pratofeito.courier.domain.model.CourierValidatedOrderWithSuccesInternalEvent
+import org.apache.commons.lang3.builder.EqualsBuilder
+import org.apache.commons.lang3.builder.HashCodeBuilder
+import org.apache.commons.lang3.builder.ToStringBuilder
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.eventsourcing.EventSourcingHandler
+import org.axonframework.modelling.command.AggregateIdentifier
 import org.axonframework.modelling.command.AggregateLifecycle
 import org.axonframework.spring.stereotype.Aggregate
 
-@Aggregate
+@Aggregate(snapshotTriggerDefinition = "courierSnapshotTriggerDefinition")
 internal class Courier {
 
+    @AggregateIdentifier
     private lateinit var id: CourierId
     private lateinit var name: PersonName
 
-    private var maxNumberOfActiveOrders: Int = 5;
-    private var numberOfActiveOrders: Int = 0;
+    private var maxNumberOfActiveOrders: Int = 5
+    private var numberOfActiveOrders: Int = 0
 
     constructor()
 
@@ -52,4 +57,10 @@ internal class Courier {
             AggregateLifecycle.apply(CourierValidatedOrderWithSuccesInternalEvent(id, orderId, auditEntry))
         }
     }
+
+    override fun toString(): String = ToStringBuilder.reflectionToString(this)
+
+    override fun equals(other: Any?): Boolean = EqualsBuilder.reflectionEquals(this, other)
+
+    override fun hashCode(): Int = HashCodeBuilder.reflectionHashCode(this)
 }
