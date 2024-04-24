@@ -32,8 +32,8 @@ import br.com.pratofeito.restaurant.domain.api.model.RestaurantOrderId
 class WebController (
     private val commandGateway: CommandGateway,
     private val customerRepository: CustomerRepository,
-    private val restaurantRepository: RestaurantRepository,
     private val courierRepository: CourierRepository,
+    private val restaurantRepository: RestaurantRepository,
     private val orderRepository: OrderRepository,
     private val restaurantOrderRepository: RestaurantOrderRepository,
     private val courierOrderRepository: CourierOrderRepository

@@ -12,11 +12,14 @@ import org.apache.commons.lang3.builder.HashCodeBuilder
 import org.apache.commons.lang3.builder.ToStringBuilder
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.eventsourcing.EventSourcingHandler
+import org.axonframework.modelling.command.AggregateIdentifier
 import org.axonframework.modelling.command.AggregateLifecycle
 import org.axonframework.spring.stereotype.Aggregate
 
-@Aggregate
+@Aggregate(snapshotTriggerDefinition = "courierOrderSnapshotTriggerDefinition")
 internal class CourierOrder {
+
+    @AggregateIdentifier
     private lateinit var id: CourierOrderId
     private lateinit var courierId: CourierId
     private lateinit var state: CourierOrderState
@@ -102,6 +105,21 @@ internal class CourierOrder {
     @EventSourcingHandler
     fun on(event: CourierOrderNotAssignedEvent) {
         state = CourierOrderState.CREATED;
+    }
+
+
+    @CommandHandler
+    fun markOrderAsDelivered(command: MarkCourierOrderAsDeliveredCommand) {
+        if (CourierOrderState.ASSIGNED == state) {
+            AggregateLifecycle.apply(CourierOrderDeliveredEvent(command.targetAggregateIdentifier, command.auditEntry))
+        } else {
+            throw UnsupportedOperationException("Courier order can't be assigned to courier: STATE is not ASSIGNED");
+        }
+    }
+
+    @EventSourcingHandler
+    fun on(event: CourierOrderDeliveredEvent) {
+        state = CourierOrderState.DELIVERED
     }
 
     override fun toString(): String = ToStringBuilder.reflectionToString(this)
