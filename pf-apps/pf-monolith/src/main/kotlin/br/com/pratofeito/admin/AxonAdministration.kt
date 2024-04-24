@@ -19,7 +19,7 @@ class AxonAdministration(
             it.start();
         }
 
-    fun getTrackingEventProcessor(): List<EventProcessor> = eventProcessingConfiguration
+    fun getTrackingEventProcessors(): List<EventProcessor> = eventProcessingConfiguration
         .eventProcessors()
         .values.filterIsInstance(TrackingEventProcessor::class.java)
 
